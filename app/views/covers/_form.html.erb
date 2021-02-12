@@ -1,0 +1,27 @@
+
+<div>
+  <%= form.label :song_title, "Cover song title" %>
+  <%= form.text_field :song_title, required: true %>
+</div>
+
+<div>
+  <%= form.label :pronouns, "Cover artist pronouns" %>
+  <%= form.text_field :pronouns, size: 8 %>
+</div>
+
+<div>
+  <%= form.label :artist_name, "Cover artist name" %>
+  <%= form.text_field :artist_name, required: true %>
+</div>
+
+<div>
+  <%= form.label :file, "Uncompressed wav file" %>
+  <%= form.file_field :file, required: true %>
+</div>
+
+<div>
+  <%= form.label :blurb, "Message" %>
+  <%= form.text_area :blurb %>
+</div>
+
+<%= form.submit "Send it to the Pod" %>
