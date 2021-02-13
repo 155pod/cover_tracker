@@ -21,7 +21,7 @@ class CoversController < ApplicationController
 
   # List covers (admin)
   def index
-    @covers = Cover.order(created_at: :desc)
+    @covers = Cover.includes(artwork_attachment: :blob, file_attachment: :blob).order(created_at: :desc)
   end
 
   private
