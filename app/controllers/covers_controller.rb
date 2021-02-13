@@ -1,4 +1,6 @@
 class CoversController < ApplicationController
+  before_action :password_required, only: [:index]
+
   def new
     @cover = Cover.new
   end
@@ -24,5 +26,13 @@ class CoversController < ApplicationController
 
   def cover_params
     params.require(:cover).permit(:song_title, :pronouns, :artist_name, :file, :blurb, :artwork)
+  end
+
+  def password_required
+    password = params[:password] || ""
+    secret = Rails.application.credentials[:password]
+    unless ActiveSupport::SecurityUtils.secure_compare(password, secret)
+      render plain: "password required", status: 403
+    end
   end
 end
