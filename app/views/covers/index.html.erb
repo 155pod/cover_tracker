@@ -1,7 +1,7 @@
 <h1 class="mb-4 mt-4">Latest Covers</h1>
 
 <% @covers.each do |cover| %>
-  <div class="border rounded p-4">
+  <div class="border rounded p-4 mb-4">
     <b>Submitted:</b> <%= l cover.created_at, format: :long %><br/>
     <b>Title:</b> <%= cover.song_title %><br/>
     <b>Artist:</b> <%= cover.artist_name %> (pronouns: <%= cover.pronouns %>)

@@ -28,13 +28,13 @@
 
 <div class="mb-3">
   <%= form.label :file, "File", class: "form-label" %>*
-  <%= form.file_field :file, required: true, class: "form-control form-control-lg" %>
+  <%= form.file_field :file, required: true, class: "form-control form-control-lg", direct_upload: true %>
   <div class="form-text">Uncompressed wav file please</div>
 </div>
 
 <div class="mb-3">
   <%= form.label :artwork, "Artwork", class: "form-label" %>
-  <%= form.file_field :artwork, class: "form-control form-control-sm" %>
+  <%= form.file_field :artwork, class: "form-control form-control-sm", direct_upload: true %>
   <div class="form-text">Artwork for your cover (optional)</div>
 </div>
 
