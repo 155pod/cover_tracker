@@ -2,23 +2,33 @@
 
 <% @covers.each do |cover| %>
   <div class="border rounded p-4 mb-4">
-    <b>Submitted:</b> <%= l cover.created_at, format: :long %><br/>
+    <h4><%= cover.artist_name %> - "<%= cover.song_title %>"</h4>
+
+    <%= l cover.created_at, format: :long %><br/>
     <b>Title:</b> <%= cover.song_title %><br/>
-    <b>Artist:</b> <%= cover.artist_name %> (pronouns: <%= cover.pronouns %>)
-    <br />
-    <%= simple_format cover.blurb %>
-    <br />
-    <%= link_to cover.file.blob.filename.sanitized, rails_blob_path(cover.file, disposition: "attachment") %>
+    <b>Artist:</b> <%= cover.artist_name %>
+    <% if cover.pronouns.present? %>
+      (pronouns: <%= cover.pronouns %>)
+    <% end %>
     <br />
 
     <% if cover.artwork.attached? %>
+      <b>Artwork:</b>
       <% artwork_path = rails_blob_path(cover.artwork, disposition: "inline") %>
-      <%= link_to artwork_path do %>
-        <%= image_tag artwork_path %>
-      <% end %>
-      <br />
+      <%= link_to cover.artwork.blob.filename.sanitized, artwork_path %><br />
     <% end %>
 
-    <%= audio_tag rails_blob_path(cover.file, disposition: "inline"), controls: true, autoplay: false, preload: "none", class: "embed-responsive-item" %>
+    <% if cover.blurb.present? %>
+      <blockquote>
+        <%= simple_format cover.blurb %>
+      </blockquote>
+    <% end %>
+
+    <% if blob = cover.file.blob %>
+      <%= link_to blob.filename.sanitized, rails_blob_path(cover.file, disposition: "attachment") %>
+      <%= audio_tag rails_blob_path(cover.file, disposition: "inline"), controls: true, autoplay: false, preload: "none", class: "embed-responsive-item" %>
+    <% else %>
+      broken :(
+    <% end %>
   </div>
 <% end %>

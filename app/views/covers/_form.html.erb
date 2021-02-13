@@ -45,11 +45,11 @@
 
 <%= form.submit "Send it to the Pod", class: "btn btn-primary" %>
 
-  <script>
-    document.querySelectorAll(".pronoun-suggestion").forEach(function(el){
-      el.classList.add("text-link");
-      el.addEventListener("click", function() {
-        document.querySelector("#cover_pronouns").value = el.innerText;
-      })
-    });
-  </script>
+<script>
+  document.querySelectorAll(".pronoun-suggestion").forEach(function(el){
+    el.classList.add("text-link");
+    el.addEventListener("click", function() {
+      document.querySelector("#cover_pronouns").value = el.innerText;
+    })
+  });
+</script>

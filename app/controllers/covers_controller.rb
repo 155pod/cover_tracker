@@ -23,6 +23,6 @@ class CoversController < ApplicationController
   private
 
   def cover_params
-    params.require(:cover).permit(:song_title, :pronouns, :artist_name, :file, :blurb)
+    params.require(:cover).permit(:song_title, :pronouns, :artist_name, :file, :blurb, :artwork)
   end
 end
