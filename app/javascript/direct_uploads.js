@@ -19,7 +19,7 @@ addEventListener("direct-upload:progress", event => {
   const { id, progress } = event.detail
   const element = document.getElementById(`direct-upload-progress-${id}`)
   element.style.width = `${progress}%`
-  element.innerText = `${progress}%`
+  element.innerText = `${Math.round(progress)}%`
 })
 
 addEventListener("direct-upload:error", event => {
