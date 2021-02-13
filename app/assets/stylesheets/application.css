@@ -13,3 +13,14 @@
  *= require_tree .
  *= require_self
  */
+
+.text-link {
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+audio {
+    display: block;
+    width: 75%;
+    border-radius: 20px;
+}

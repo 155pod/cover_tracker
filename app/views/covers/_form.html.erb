@@ -1,27 +1,55 @@
 
-<div>
-  <%= form.label :song_title, "Cover song title" %>
-  <%= form.text_field :song_title, required: true %>
+<div class="mb-3">
+  <%= form.label :song_title, "Cover Title", class: "form-label form-required" %>*
+  <%= form.text_field :song_title, required: true, class: "form-control" %>
+  <div class="form-text">
+    What's this cover called?
+  </div>
 </div>
 
-<div>
-  <%= form.label :pronouns, "Cover artist pronouns" %>
-  <%= form.text_field :pronouns, size: 8 %>
+<div class="mb-3">
+  <%= form.label :pronouns, "Pronouns", class: "form-label" %>
+  <%= form.text_field :pronouns, size: 8, class: "form-control" %>
+  <div class="form-text">
+    <span class="pronoun-suggestion">he/him</span>,
+    <span class="pronoun-suggestion">she/her</span>,
+    <span class="pronoun-suggestion">they/them</span>,
+    or your own ❤️
+  </div>
 </div>
 
-<div>
-  <%= form.label :artist_name, "Cover artist name" %>
-  <%= form.text_field :artist_name, required: true %>
+<div class="mb-3">
+  <%= form.label :artist_name, "Artist name", class: "form-label" %>*
+  <%= form.text_field :artist_name, required: true, class: "form-control" %>
+  <div class="form-text">
+    Who is this cover by?
+  </div>
 </div>
 
-<div>
-  <%= form.label :file, "Uncompressed wav file" %>
-  <%= form.file_field :file, required: true %>
+<div class="mb-3">
+  <%= form.label :file, "File", class: "form-label" %>*
+  <%= form.file_field :file, required: true, class: "form-control form-control-lg" %>
+  <div class="form-text">Uncompressed wav file please</div>
 </div>
 
-<div>
-  <%= form.label :blurb, "Message" %>
-  <%= form.text_area :blurb %>
+<div class="mb-3">
+  <%= form.label :artwork, "Artwork", class: "form-label" %>
+  <%= form.file_field :artwork, class: "form-control form-control-sm" %>
+  <div class="form-text">Artwork for your cover (optional)</div>
 </div>
 
-<%= form.submit "Send it to the Pod" %>
+<div class="mb-3">
+  <%= form.label :blurb, "Message", class: "form-label" %>
+  <%= form.text_area :blurb, class: "form-control" %>
+</div>
+
+<%= form.submit "Send it to the Pod", class: "btn btn-primary" %>
+
+  <script>
+    document.querySelectorAll(".pronoun-suggestion").forEach(function(el){
+      el.classList.add("text-link");
+      el.addEventListener("click", function() {
+        document.querySelector("#cover_pronouns").value = el.innerText;
+      })
+    });
+  </script>
