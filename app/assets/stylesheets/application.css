@@ -24,3 +24,10 @@ audio {
     width: 75%;
     border-radius: 20px;
 }
+
+.blurb {
+	padding-left: 10px;
+	border-left: 7px solid gray;
+	margin-top: 10px;
+}
+}
