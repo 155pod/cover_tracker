@@ -8,13 +8,15 @@ class CoversController < ApplicationController
   def create
     cover = Cover.new(cover_params)
     if cover.save
-      render plain: "success!"
+      flash[:notice] = "Successfully submitted #{cover.artist_name} - \"#{cover.song_title}\""
+      redirect_to "/success"
     else
-      render plain: "ERROR!!!"
+      flash[:error] = "ERROR: There was a problem saving your cover"
+      redirect_to "/"
     end
   end
 
-  def show
+  def success
   end
 
   # List covers (admin)
