@@ -36,6 +36,10 @@ addEventListener("direct-upload:error", event => {
       If retrying doesn't work :( send your cover to blink155pod@gmail.com
     </div>
   `)
+
+  if (typeof Bugsnag !== 'undefined') {
+    Bugsnag.notify(error);
+  }
 })
 
 addEventListener("direct-upload:end", event => {
