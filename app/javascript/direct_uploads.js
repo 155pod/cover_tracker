@@ -28,6 +28,14 @@ addEventListener("direct-upload:error", event => {
   const element = document.getElementById(`direct-upload-progress-${id}`)
   element.innerText = "error";
   element.classList.add("bg-danger")
+
+  element.parentNode.insertAdjacentHTML("afterend", `
+    <div class="alert alert-danger" role="alert">
+      An error occurred processing your upload:<br/>
+      ${error}<br/>
+      If retrying doesn't work :( send your cover to blink155pod@gmail.com
+    </div>
+  `)
 })
 
 addEventListener("direct-upload:end", event => {
