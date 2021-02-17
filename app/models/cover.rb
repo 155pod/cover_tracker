@@ -5,4 +5,6 @@ class Cover < ApplicationRecord
   validates :song_title, presence: true
   validates :artist_name, presence: true
   validates :file, presence: true
+
+  include Discard::Model
 end

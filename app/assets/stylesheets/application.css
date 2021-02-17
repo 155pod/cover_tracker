@@ -30,3 +30,7 @@ audio {
 	border-left: 7px solid gray;
 	margin-top: 10px;
 }
+
+.cover-actions{
+	float: right;
+}
