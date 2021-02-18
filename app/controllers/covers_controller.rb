@@ -25,7 +25,7 @@ class CoversController < ApplicationController
   end
 
   def archive
-    Cover.find(params[:id]).discard
+    Cover.find(params[:id]).discard!
     redirect_to_admin
   end
 
