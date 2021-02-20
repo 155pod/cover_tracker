@@ -12,7 +12,13 @@
       <% end %>
     </div>
 
-    <h4><%= cover.artist_name %> - "<%= cover.song_title %>"</h4>
+    <h4>
+      <%= cover.artist_name %> - "<%= cover.song_title %>"
+      <% if cover.discarded? %>
+        <span class="badge bg-secondary">Archived</span>
+      <% end %>
+    </h4>
+
 
     <%= l cover.created_at, format: :long %><br/>
     <b>Title:</b> <%= cover.song_title %><br/>
