@@ -41,7 +41,7 @@
     <% end %>
 
     <% if blob = cover.file.blob %>
-      <%= link_to blob.filename.sanitized, rails_blob_path(cover.file, disposition: "attachment") %>
+      <%= link_to blob.filename.sanitized, rails_blob_path(cover.file, disposition: "attachment"), download: "download" %>
       <%= audio_tag rails_blob_path(cover.file, disposition: "inline"), controls: true, autoplay: false, preload: "none", class: "embed-responsive-item" %>
     <% else %>
       broken :(
