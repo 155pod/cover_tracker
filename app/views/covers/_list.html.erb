@@ -1,0 +1,44 @@
+<% covers.each do |cover| %>
+  <div class="border rounded p-4 mb-4">
+    <div class="cover-actions">
+      <% if cover.discarded? %>
+        <%= button_to unarchive_cover_path(cover), { method: :post, class: "btn btn-primary btn-sm", params: { password: params[:password] }, data: { confirm: "This will unarchive the cover '#{cover.song_title}' by #{cover.artist_name}. Are you sure?" }, title: "Unarchive" } do %>
+          <i class="bi bi-archive"></i>
+        <% end %>
+      <% else %>
+        <%= button_to archive_cover_path(cover), { method: :post, class: "btn btn-secondary btn-sm", params: { password: params[:password] }, data: { confirm: "This will archive the cover '#{cover.song_title}' by #{cover.artist_name}. Are you sure?" }, title: "Archive" } do %>
+          <i class="bi bi-archive"></i>
+        <% end %>
+      <% end %>
+    </div>
+
+    <h4><%= cover.artist_name %> - "<%= cover.song_title %>"</h4>
+
+    <%= l cover.created_at, format: :long %><br/>
+    <b>Title:</b> <%= cover.song_title %><br/>
+    <b>Artist:</b> <%= cover.artist_name %>
+    <% if cover.pronouns.present? %>
+      (pronouns: <%= cover.pronouns %>)
+    <% end %>
+    <br />
+
+    <% if cover.artwork.attached? %>
+      <b>Artwork:</b>
+      <% artwork_path = rails_blob_path(cover.artwork, disposition: "inline") %>
+      <%= link_to cover.artwork.blob.filename.sanitized, artwork_path %><br />
+    <% end %>
+
+    <% if cover.blurb.present? %>
+      <blockquote class="blurb">
+        <%= simple_format cover.blurb %>
+      </blockquote>
+    <% end %>
+
+    <% if blob = cover.file.blob %>
+      <%= link_to blob.filename.sanitized, rails_blob_path(cover.file, disposition: "attachment") %>
+      <%= audio_tag rails_blob_path(cover.file, disposition: "inline"), controls: true, autoplay: false, preload: "none", class: "embed-responsive-item" %>
+    <% else %>
+      broken :(
+    <% end %>
+  </div>
+<% end %>

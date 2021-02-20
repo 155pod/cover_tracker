@@ -21,12 +21,21 @@ class CoversController < ApplicationController
 
   # List covers (admin)
   def index
-    @covers = Cover.kept.includes(artwork_attachment: :blob, file_attachment: :blob).order(created_at: :desc)
+    @covers = Cover.kept.includes(artwork_attachment: :blob, file_attachment: :blob).order(created_at: :desc).load
+  end
+
+  def index_archived
+    @covers = Cover.discarded.includes(artwork_attachment: :blob, file_attachment: :blob).order(created_at: :desc).load
   end
 
   def archive
     Cover.find(params[:id]).discard!
     redirect_to_admin
+  end
+
+  def unarchive
+    Cover.find(params[:id]).undiscard!
+    redirect_back fallback_location: admin_archived_path(password: params[:password])
   end
 
   def archive_all
