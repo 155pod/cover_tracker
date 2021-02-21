@@ -23,7 +23,12 @@
     <script src="//d2wy8f7a9ursnm.cloudfront.net/v7/bugsnag.min.js"></script>
     <script>if (typeof Bugsnag !== 'undefined') { Bugsnag.start({ apiKey: '828dc399fc0f49b94bb2bd0bbae2f3a6' }) }</script>
 
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <% if content_for?(:head) %>
+      <%= yield :head %>
+    <% else %>
+      <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <% end %>
+
   </head>
 
   <body>

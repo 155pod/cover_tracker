@@ -1,3 +1,7 @@
+<% content_for(:head) do %>
+  <%= javascript_pack_tag 'admin', 'data-turbolinks-track': 'reload' %>
+<% end %>
+
 <h1 class="mb-4 mt-4">Archived Covers (<%= @covers.size %>)</h1>
 
 <div class="mb-4">

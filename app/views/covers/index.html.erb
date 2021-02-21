@@ -1,3 +1,7 @@
+<% content_for(:head) do %>
+  <%= javascript_pack_tag 'admin', 'data-turbolinks-track': 'reload' %>
+<% end %>
+
 <% content_for(:nav) do %>
   <nav class="navbar navbar-expand-lg navbar-light bg-light position-sticky top-0 border-bottom" style="z-index: 9999;">
     <div class="container-fluid">
