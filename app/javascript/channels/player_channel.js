@@ -10,6 +10,12 @@ export default consumer.subscriptions.create("PlayerChannel", {
   disconnected() {
   },
 
+  seek(el, value) {
+    if (Math.abs(el.currentTime - value) > 2) {
+      el.currentTime = value;
+    }
+  },
+
   received(data) {
     const { state, target, source, value } = data;
 
@@ -18,15 +24,18 @@ export default consumer.subscriptions.create("PlayerChannel", {
 
     const el = document.getElementById(target);
     if (state == "play") {
+      if (el.parentNode.scrollIntoViewIfNeeded) {
+        el.parentNode.scrollIntoViewIfNeeded(true)
+      }
+
+      this.seek(el, value);
       el.play();
     } else if (state == "pause") {
       el.pause();
     } else if (state == "seek") {
-      if (Math.abs(el.currentTime - value) > 2) {
-        el.currentTime = value;
-      }
+      this.seek(el, value);
     } else if (state == "load") {
-      if (el.readyState == 0) {
+      if (el.readyState == 0 && el.paused && el.networkState <= 1) {
         el.load();
       }
     }

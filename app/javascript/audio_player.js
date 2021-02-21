@@ -25,12 +25,11 @@ class AudioPlayer {
     const update = () => this.update();
 
     this.playPause.addEventListener("click", () => {
-      this.ensureLoaded();
       if (this.isPlaying()) {
         this.push("pause");
         this.audio.pause();
       } else {
-        this.push("play");
+        this.push("play", this.audio.currentTime || 0);
         this.audio.play();
       }
       this.update();
@@ -52,6 +51,7 @@ class AudioPlayer {
     this.audio.addEventListener("ended", update);
     this.audio.addEventListener("seeked", update);
     this.audio.addEventListener("timeupdate", update);
+    this.audio.addEventListener("durationchange", update);
 
     update();
   }
@@ -65,7 +65,8 @@ class AudioPlayer {
       this.loaded = true;
       this.push("load");
 
-      if (this.audio.readyState == 0) {
+      console.log({readyState: this.audio.readyState, paused: this.audio.paused, networkState: this.audio.networkState});
+      if (this.audio.readyState == 0 && this.audio.paused && this.audio.networkState <= 1) {
         this.audio.load();
       }
     }
