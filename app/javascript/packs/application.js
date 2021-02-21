@@ -8,7 +8,9 @@ import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 import "direct_uploads"
+import AudioPlayer from "audio_player"
 
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+AudioPlayer.start()

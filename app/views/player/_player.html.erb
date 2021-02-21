@@ -1,0 +1,11 @@
+<%= audio_tag rails_blob_path(cover.file, disposition: "inline"), controls: true, autoplay: false, preload: "none", class: "embed-responsive-item", id: "player_#{dom_id(cover)}", hidden: true %>
+
+<div class="container mt-2 js-audio-player" data-target="player_<%= dom_id(cover) %>">
+  <div class="input-group">
+    <button class="btn btn-primary js-play-pause">
+      <i class="bi bi-play-fill"></i>
+    </button>
+    <input type="range" autocomplete="false" class="form-range js-range form-control ps-2 pe-2" min="0" max="100" step="0.1" value="0" />
+    <span class="input-group-text js-progress">00:00 / 00:00</span>
+  </div>
+</div>

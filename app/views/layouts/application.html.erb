@@ -27,6 +27,8 @@
   </head>
 
   <body>
+    <%= yield :nav %>
+
     <div class="container mt-4">
       <% if flash[:notice] %>
         <div class="alert alert-success" role="alert"><%= flash[:notice] %></div>
