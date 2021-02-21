@@ -68,7 +68,6 @@ class AudioPlayer {
       this.loaded = true;
       this.push("load");
 
-      console.log({readyState: this.audio.readyState, paused: this.audio.paused, networkState: this.audio.networkState});
       if (this.audio.readyState == 0 && this.audio.paused && this.audio.networkState <= 1) {
         this.audio.load();
       }
