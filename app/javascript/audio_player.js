@@ -24,7 +24,10 @@ class AudioPlayer {
 
     const update = () => this.update();
 
-    this.playPause.addEventListener("click", () => {
+    this.playPause.addEventListener("mouseenter", () => {
+      this.ensureLoaded();
+    });
+    this.playPause.addEventListener("mousedown", () => {
       if (this.isPlaying()) {
         this.push("pause");
         this.audio.pause();
