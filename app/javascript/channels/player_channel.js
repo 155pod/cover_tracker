@@ -26,6 +26,8 @@ export default consumer.subscriptions.create("PlayerChannel", {
     if (state == "play") {
       if (el.parentNode.scrollIntoViewIfNeeded) {
         el.parentNode.scrollIntoViewIfNeeded(true)
+      } else if (el.parentNode.scrollIntoView) {
+        el.parentNode.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
       }
 
       this.seek(el, value);
