@@ -13,5 +13,8 @@ module CoverTracker
 
     # Pod time
     config.time_zone = 'Eastern Time (US & Canada)'
+
+    # Allows more time for uploads
+    config.active_storage.service_urls_expire_in = 1.hour
   end
 end
