@@ -5,3 +5,7 @@
 .js-progress {
 	width: 8em;
 }
+
+.js-volume {
+	flex: 0.17 1 auto !important;
+}

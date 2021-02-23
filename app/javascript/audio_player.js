@@ -21,6 +21,7 @@ class AudioPlayer {
     this.playPause = playerEl.querySelector(".js-play-pause");
     this.range = playerEl.querySelector(".js-range");
     this.progress = playerEl.querySelector(".js-progress");
+    this.volume = playerEl.querySelector(".js-volume");
 
     const update = () => this.update();
 
@@ -48,6 +49,9 @@ class AudioPlayer {
       this.audio.currentTime = this.rangePosition();
       this.push("seek", this.rangePosition());
     });
+    this.volume.addEventListener("input", () => {
+      this.audio.volume = this.volume.value;
+    });
 
     this.audio.addEventListener("play", update);
     this.audio.addEventListener("pause", update);
@@ -55,6 +59,7 @@ class AudioPlayer {
     this.audio.addEventListener("seeked", update);
     this.audio.addEventListener("timeupdate", update);
     this.audio.addEventListener("durationchange", update);
+    this.audio.addEventListener("volumechange", update);
 
     update();
   }
@@ -104,6 +109,8 @@ class AudioPlayer {
       }
       this.progress.innerText = `${toMMSS(currentTime)} / ${toMMSS(duration)}`;
     }
+
+    this.volume.value = this.audio.volume;
   }
 
   static start() {
