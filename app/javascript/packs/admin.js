@@ -6,7 +6,7 @@ Rails.start()
 AudioPlayer.start()
 
 window.addEventListener("load", () => {
-  document.querySelectorAll(".js-archive-cover").forEach((button) => {
+  document.querySelectorAll(".js-remove-cover").forEach((button) => {
     const form = button.form;
     const container = document.getElementById(button.getAttribute("data-target"))
     form.addEventListener("ajax:before", (event) => {
