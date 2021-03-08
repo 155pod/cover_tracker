@@ -21,7 +21,7 @@
     <%= stylesheet_link_tag 'application', media: 'all' %>
 
     <script src="//d2wy8f7a9ursnm.cloudfront.net/v7/bugsnag.min.js"></script>
-    <script>if (typeof Bugsnag !== 'undefined') { Bugsnag.start({ apiKey: '828dc399fc0f49b94bb2bd0bbae2f3a6' }) }</script>
+    <script>if (typeof Bugsnag !== 'undefined') { Bugsnag.start({ apiKey: '828dc399fc0f49b94bb2bd0bbae2f3a6', enabledReleaseStages: [ 'production' ] }) }</script>
 
     <% if content_for?(:head) %>
       <%= yield :head %>
