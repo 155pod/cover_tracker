@@ -1,12 +1,12 @@
 <% covers.each do |cover| %>
-  <div class="border rounded p-4 mb-4">
+  <div id="<%= dom_id(cover) %>" class="border rounded p-4 mb-4">
     <div class="cover-actions">
       <% if cover.discarded? %>
         <%= button_to unarchive_cover_path(cover), { method: :post, class: "btn btn-primary btn-sm", params: { password: params[:password] }, data: { confirm: "This will unarchive the cover '#{cover.song_title}' by #{cover.artist_name}. Are you sure?" }, title: "Unarchive" } do %>
           <i class="bi bi-archive"></i>
         <% end %>
       <% else %>
-        <%= button_to archive_cover_path(cover), { method: :post, class: "btn btn-secondary btn-sm", params: { password: params[:password] }, data: { confirm: "This will archive the cover '#{cover.song_title}' by #{cover.artist_name}. Are you sure?" }, title: "Archive" } do %>
+        <%= button_to archive_cover_path(cover), { method: :post, class: "btn btn-secondary btn-sm js-archive-cover", params: { password: params[:password] }, data: { confirm: "This will archive the cover '#{cover.song_title}' by #{cover.artist_name}. Are you sure?", target: dom_id(cover) }, title: "Archive", remote: true } do %>
           <i class="bi bi-archive"></i>
         <% end %>
       <% end %>

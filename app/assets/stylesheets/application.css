@@ -34,3 +34,7 @@ audio {
 .cover-actions{
 	float: right;
 }
+
+.deleting {
+	opacity: 50%;
+}
