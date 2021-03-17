@@ -49,6 +49,7 @@ export default consumer.subscriptions.create("PlayerChannel", {
   },
 
   isEnabled() {
-    return document.querySelector("#watch_together_enabled").checked;
+    const checkbox = document.querySelector("#watch_together_enabled").checked;
+    return checkbox && checkbox.enabled;
   }
 });
