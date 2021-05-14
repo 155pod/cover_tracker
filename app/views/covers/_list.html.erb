@@ -31,7 +31,7 @@
     <% if cover.artwork.attached? %>
       <b>Artwork:</b>
       <% artwork_path = rails_blob_path(cover.artwork, disposition: "inline") %>
-      <%= link_to cover.artwork.blob.filename.sanitized, artwork_path %><br />
+      <%= link_to cover.artwork.blob.filename.sanitized, artwork_path, target: "_blank" %><br />
     <% end %>
 
     <% if cover.blurb.present? %>
@@ -41,7 +41,7 @@
     <% end %>
 
     <% if blob = cover.file.blob %>
-      <%= link_to blob.filename.sanitized, rails_blob_path(cover.file, disposition: "attachment"), download: "download" %>
+      <%= link_to blob.filename.sanitized, rails_blob_path(cover.file, disposition: "attachment"), download: "download", target: "_blank" %>
       <%= render "player/player", cover: cover %>
     <% else %>
       broken :(
