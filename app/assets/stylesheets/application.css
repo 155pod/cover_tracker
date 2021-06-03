@@ -31,7 +31,11 @@ audio {
 	margin-top: 10px;
 }
 
-.cover-actions{
+.cover-title {
+	cursor: grab;
+}
+
+.cover-actions {
 	float: right;
 }
 
