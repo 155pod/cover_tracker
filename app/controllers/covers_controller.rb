@@ -1,5 +1,5 @@
 class CoversController < ApplicationController
-  before_action :password_required, only: [:index, :archive, :archive_all]
+  before_action :password_required, only: [:index, :archive, :archive_all, :update_order]
 
   def new
     @cover = Cover.new
@@ -21,11 +21,11 @@ class CoversController < ApplicationController
 
   # List covers (admin)
   def index
-    @covers = Cover.kept.includes(artwork_attachment: :blob, file_attachment: :blob).order(created_at: :desc).load
+    @covers = Cover.kept.includes(artwork_attachment: :blob, file_attachment: :blob).display_order.load
   end
 
   def index_archived
-    @covers = Cover.discarded.includes(artwork_attachment: :blob, file_attachment: :blob).order(created_at: :desc).load
+    @covers = Cover.discarded.includes(artwork_attachment: :blob, file_attachment: :blob).display_order.load
   end
 
   def archive
@@ -41,6 +41,16 @@ class CoversController < ApplicationController
   def archive_all
     Cover.update_all(discarded_at: Time.current)
     redirect_to_admin
+  end
+
+  def update_order
+    ids = params.require(:ids)
+    Cover.transaction do
+      ids.each_with_index do |id, index|
+        Cover.where(id: id).update_all(position: 1+index)
+      end
+    end
+    head :ok
   end
 
   private

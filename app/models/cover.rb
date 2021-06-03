@@ -8,6 +8,10 @@ class Cover < ApplicationRecord
 
   include Discard::Model
 
+  scope :display_order, ->() {
+    order(position: :asc, created_at: :desc)
+  }
+
   def start_time
     if time = start_time_seconds
       "%i:%.2i" % [(time / 60), time % 60]

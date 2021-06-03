@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_03_030015) do
+ActiveRecord::Schema.define(version: 2021_06_03_054452) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 2021_06_03_030015) do
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "discarded_at"
     t.integer "start_time_seconds", default: 0
+    t.integer "position", default: 0
     t.index ["discarded_at"], name: "index_covers_on_discarded_at"
   end
 
