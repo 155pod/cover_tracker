@@ -1,4 +1,4 @@
-<% covers.each do |cover| %>
+<% covers.each_with_index do |cover, idx| %>
   <div id="<%= dom_id(cover) %>" class="border rounded p-4 mb-4">
     <div class="cover-actions">
       <% if cover.discarded? %>
@@ -13,6 +13,7 @@
     </div>
 
     <h4>
+      <small class="text-muted"><%= 1 + idx %>.</small>
       <%= cover.artist_name %> - "<%= cover.song_title %>"
       <% if cover.discarded? %>
         <span class="badge bg-secondary">Archived</span>
