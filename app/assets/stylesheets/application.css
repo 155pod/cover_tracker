@@ -38,3 +38,7 @@ audio {
 .deleting {
 	opacity: 50%;
 }
+
+input[value]:invalid {
+  border: red solid 3px;
+}
