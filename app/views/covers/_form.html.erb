@@ -27,9 +27,14 @@
 </div>
 
 <div class="mb-3">
-  <%= form.label :file, "File", class: "form-label" %>*
+  <%= form.label :file, "WAV File", class: "form-label" %>*
   <%= form.file_field :file, required: true, class: "form-control form-control-lg", direct_upload: true %>
-  <div class="form-text">Uncompressed wav file please</div>
+  <div class="form-text">Please send .wav</div>
+</div>
+
+<div class="mb-3">
+  <%= form.label :start_time, "Start Time", class: "form-label" %>*
+  <%= form.text_field :start_time, class: "form-control form-control-sm" %>
 </div>
 
 <div class="mb-3">
