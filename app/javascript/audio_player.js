@@ -14,8 +14,12 @@ class AudioPlayer {
   constructor(playerEl) {
     this.playerEl = playerEl;
 
+    this.duration = playerEl.getAttribute("data-duration") | 0;
+    this.startTime = playerEl.getAttribute("data-start-time") | 0;
+
     const targetId = playerEl.getAttribute("data-target");
     this.audio = document.getElementById(targetId);
+    this.audio.currentTime = this.startTime;
     this.loaded = false;
 
     this.playPause = playerEl.querySelector(".js-play-pause");
@@ -33,7 +37,7 @@ class AudioPlayer {
         this.push("pause");
         this.audio.pause();
       } else {
-        this.push("play", this.audio.currentTime || 0);
+        this.push("play", this.audio.currentTime || this.startTime);
         this.audio.play();
       }
       this.update();
@@ -94,14 +98,14 @@ class AudioPlayer {
       this.playPause.innerHTML = `<i class="bi bi-play-fill"></i>`;
     }
 
-    let duration = this.audio.duration || 0;
+    let duration = this.audio.duration || this.duration;
 
     if (this.scrubbing) {
       let currentTime = this.rangePosition();
 
       this.progress.innerText = `${toMMSS(currentTime)} / ${toMMSS(duration)}`;
     } else {
-      let currentTime = this.audio.currentTime || 0;
+      let currentTime = this.audio.currentTime || this.startTime;
       if (currentTime == 0 || duration == 0) {
         this.range.value = 0;
       } else {
