@@ -10,7 +10,7 @@ class AudioAnalyzer < ActiveStorage::Analyzer
       channels: audio_stream["channels"]&.to_i,
       bit_rate: audio_stream["bit_rate"]&.to_i,
       bits_per_sample: audio_stream["bits_per_sample"]&.to_i,
-      format_mame: container["format_name"]
+      format_name: container["format_name"]
     }
   end
 
