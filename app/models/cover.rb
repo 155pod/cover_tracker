@@ -22,7 +22,7 @@ class Cover < ApplicationRecord
 
   def start_time=(value)
     if value && value =~ /(\d+):(\d+)/
-      self.start_time_seconds = ($1.to_i * 60 + $2)
+      self.start_time_seconds = ($1.to_i * 60 + $2.to_i)
     else
       self.start_time_seconds = nil
     end

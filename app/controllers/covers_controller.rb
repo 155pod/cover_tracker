@@ -56,7 +56,7 @@ class CoversController < ApplicationController
   private
 
   def new_cover_params
-    params.require(:cover).permit(:song_title, :pronouns, :artist_name, :file, :blurb, :artwork)
+    params.require(:cover).permit(:song_title, :pronouns, :artist_name, :file, :blurb, :artwork, :start_time)
   end
 
   def password_required
