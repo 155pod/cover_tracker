@@ -48,6 +48,11 @@
   <%= form.text_area :blurb, class: "form-control" %>
 </div>
 
+<div class="mb-3">
+  <%= form.check_box :b_side %>
+  <%= form.label :b_side, "It's for a B-sides release", class: "form-label pe-auto user-select-none" %>
+</div>
+
 <%= form.submit "Send it to the Pod", class: "btn btn-primary" %>
 
 <script>
