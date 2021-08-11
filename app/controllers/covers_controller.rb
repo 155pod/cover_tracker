@@ -21,11 +21,13 @@ class CoversController < ApplicationController
 
   # List covers (admin)
   def index
-    @covers = Cover.kept.includes(artwork_attachment: :blob, file_attachment: :blob).display_order.load
+    @b_sides = Cover.b_sides.kept.includes(artwork_attachment: :blob, file_attachment: :blob).display_order.load
+    @covers = Cover.no_b_sides.kept.includes(artwork_attachment: :blob, file_attachment: :blob).display_order.load
   end
 
   def index_archived
-    @covers = Cover.discarded.includes(artwork_attachment: :blob, file_attachment: :blob).display_order.load
+    @b_sides = Cover.b_sides.discarded.includes(artwork_attachment: :blob, file_attachment: :blob).display_order.load
+    @covers = Cover.no_b_sides.discarded.includes(artwork_attachment: :blob, file_attachment: :blob).display_order.load
   end
 
   def archive
@@ -39,7 +41,12 @@ class CoversController < ApplicationController
   end
 
   def archive_all
-    Cover.update_all(discarded_at: Time.current)
+    Cover.no_b_sides.update_all(discarded_at: Time.current)
+    redirect_to_admin
+  end
+
+  def archive_b_sides
+    Cover.b_sides.update_all(discarded_at: Time.current)
     redirect_to_admin
   end
 

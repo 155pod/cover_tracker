@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     end
     collection do
       post :archive_all
+      post :archive_b_sides
       post :update_order
     end
   end

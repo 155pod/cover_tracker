@@ -14,15 +14,28 @@
   </nav>
 <% end %>
 
-<h1 class="mb-4 mt-4">Current Covers (<%= @covers.size %>)</h1>
-
 <div class="mb-4 text-end text-nowrap">
   <%= link_to admin_archived_path(password: params[:password]), { class: "btn btn-secondary btn-md" } do %>
     <i class="bi bi-archive"></i>&nbsp;&nbsp;View archived (<%= Cover.discarded.count %>)
   <% end %>
+</div>
+
+<h1 class="mb-4 mt-4">Current Covers (<%= @covers.size %>)</h1>
+
+<div class="mb-4 text-end text-nowrap">
   <%= button_to archive_all_covers_path, { method: :post, class: "btn btn-danger btn-lg", form_class: "d-inline", params: { password: params[:password] }, data: { confirm: "This will archive ALL existing covers. Are you sure?" } } do %>
-    <i class="bi bi-archive"></i>&nbsp;&nbsp;Archive All
+    <i class="bi bi-archive"></i>&nbsp;&nbsp;Archive All Covers
   <% end %>
 </div>
 
 <%= render "list", covers: @covers %>
+
+<h1 class="mb-4 mt-4">Current B-Sides (<%= @b_sides.size %>)</h1>
+
+<div class="mb-4 text-end text-nowrap">
+  <%= button_to archive_b_sides_covers_path, { method: :post, class: "btn btn-danger btn-lg", form_class: "d-inline", params: { password: params[:password] }, data: { confirm: "This will archive ALL existing covers. Are you sure?" } } do %>
+    <i class="bi bi-archive"></i>&nbsp;&nbsp;Archive All B-Sides
+  <% end %>
+</div>
+
+<%= render "list", covers: @b_sides %>
