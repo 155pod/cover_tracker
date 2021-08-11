@@ -36,7 +36,8 @@ audio {
 }
 
 .cover-actions {
-	float: right;
+  display: flex;
+  float: right;
 }
 
 .deleting {
