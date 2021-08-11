@@ -8,6 +8,8 @@ class Cover < ApplicationRecord
 
   include Discard::Model
 
+  scope :b_sides, ->() { where(b_side: true) }
+  scope :no_b_sides, ->() { where(b_side: false) }
   scope :display_order, ->() {
     order(position: :asc, created_at: :desc)
   }
