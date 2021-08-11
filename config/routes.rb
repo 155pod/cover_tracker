@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     member do
       post :archive
       post :unarchive
+      post :toggle_b_side
     end
     collection do
       post :archive_all

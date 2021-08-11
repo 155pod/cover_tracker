@@ -50,6 +50,11 @@ class CoversController < ApplicationController
     redirect_to_admin
   end
 
+  def toggle_b_side
+    Cover.find(params[:id]).toggle(:b_side).save
+    redirect_to request.referrer
+  end
+
   def update_order
     ids = params.require(:ids)
     Cover.transaction do

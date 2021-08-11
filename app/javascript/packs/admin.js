@@ -66,4 +66,29 @@ window.addEventListener("load", () => {
       saveOrder(list)
     }
   });
+
+  document.querySelectorAll(".js-toggle-b-side").forEach((button) => {
+    const form = button.form;
+    const container = document.getElementById(button.getAttribute("data-target"));
+    form.addEventListener("ajax:before", (event) => {
+      container.classList.add("deleting");
+      container.classList.add("pe-none");
+    });
+
+    form.addEventListener("ajax:success", (event) => {
+      const coverListNode = document.getElementById("cover_list");
+      const bSideListNode = document.getElementById("b_side_list");
+
+      if (container.parentNode === bSideListNode) {
+        coverListNode.appendChild(container);
+        bSideListNode.removeChild(container);
+      } else {
+        bSideListNode.appendChild(container);
+        coverListNode.removeChild(container);
+      };
+
+      container.classList.remove("deleting");
+      container.classList.remove("pe-none");
+    });
+  });
 });
