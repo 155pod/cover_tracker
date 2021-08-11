@@ -118,3 +118,8 @@ Rails.application.configure do
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
 end
+
+Bugsnag.configure do |config|
+  config.api_key = Rails.application.credentials[:bugsnag_api_key]
+  config.notify_release_stages = ['production']
+end
