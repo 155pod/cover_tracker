@@ -41,12 +41,14 @@ class CoversController < ApplicationController
   end
 
   def archive_all
-    Cover.no_b_sides.update_all(discarded_at: Time.current)
-    redirect_to_admin
-  end
+    covers =
+      if params[:ids].blank?
+        params[:b_sides] ? Cover.b_sides : Cover.no_b_sides
+      else
+        Cover.where id: params[:ids].split(",")
+      end
 
-  def archive_b_sides
-    Cover.b_sides.update_all(discarded_at: Time.current)
+    covers.update_all(discarded_at: Time.current)
     redirect_to_admin
   end
 
