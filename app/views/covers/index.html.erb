@@ -23,19 +23,19 @@
 <h1 class="mb-4 mt-4">Current Covers (<%= @covers.size %>)</h1>
 
 <div class="mb-4 text-end text-nowrap">
-  <%= button_to archive_all_covers_path, { method: :post, class: "btn btn-danger btn-lg", form_class: "d-inline", params: { password: params[:password] }, data: { confirm: "This will archive ALL existing covers. Are you sure?" } } do %>
+  <%= button_to archive_all_covers_path, { method: :post, class: "js-archive-all-covers btn btn-danger btn-lg", form_class: "d-inline", params: { password: params[:password] }, data: { confirm: "This will archive ALL existing covers. Are you sure?" } } do %>
     <i class="bi bi-archive"></i>&nbsp;&nbsp;Archive All Covers
   <% end %>
 </div>
 
-<%= render "list", covers: @covers %>
+<%= render "list", covers: @covers unless @covers.blank? %>
 
 <h1 class="mb-4 mt-4">Current B-Sides (<%= @b_sides.size %>)</h1>
 
 <div class="mb-4 text-end text-nowrap">
-  <%= button_to archive_b_sides_covers_path, { method: :post, class: "btn btn-danger btn-lg", form_class: "d-inline", params: { password: params[:password] }, data: { confirm: "This will archive ALL existing covers. Are you sure?" } } do %>
+  <%= button_to archive_b_sides_covers_path, { method: :post, class: "js-archive-all-b-sides btn btn-danger btn-lg", form_class: "d-inline", params: { password: params[:password] }, data: { confirm: "This will archive ALL existing covers. Are you sure?" } } do %>
     <i class="bi bi-archive"></i>&nbsp;&nbsp;Archive All B-Sides
   <% end %>
 </div>
 
-<%= render "list", covers: @b_sides %>
+<%= render "list", covers: @b_sides unless @b_sides.blank? %>
