@@ -21,11 +21,13 @@ class CoversController < ApplicationController
 
   # List covers (admin)
   def index
-    @covers = Cover.kept.includes(artwork_attachment: :blob, file_attachment: :blob).display_order.load
+    @b_sides = Cover.b_sides.kept.includes(artwork_attachment: :blob, file_attachment: :blob).display_order.load
+    @covers = Cover.no_b_sides.kept.includes(artwork_attachment: :blob, file_attachment: :blob).display_order.load
   end
 
   def index_archived
-    @covers = Cover.discarded.includes(artwork_attachment: :blob, file_attachment: :blob).display_order.load
+    @b_sides = Cover.b_sides.discarded.includes(artwork_attachment: :blob, file_attachment: :blob).display_order.load
+    @covers = Cover.no_b_sides.discarded.includes(artwork_attachment: :blob, file_attachment: :blob).display_order.load
   end
 
   def archive
@@ -39,8 +41,20 @@ class CoversController < ApplicationController
   end
 
   def archive_all
-    Cover.update_all(discarded_at: Time.current)
+    covers =
+      if params[:ids].blank?
+        params[:b_sides] ? Cover.b_sides : Cover.no_b_sides
+      else
+        Cover.where id: params[:ids].split(",")
+      end
+
+    covers.update_all(discarded_at: Time.current)
     redirect_to_admin
+  end
+
+  def toggle_b_side
+    Cover.find(params[:id]).toggle(:b_side).save
+    redirect_to request.referrer
   end
 
   def update_order
@@ -56,7 +70,7 @@ class CoversController < ApplicationController
   private
 
   def new_cover_params
-    params.require(:cover).permit(:song_title, :pronouns, :artist_name, :file, :blurb, :artwork, :start_time)
+    params.require(:cover).permit(:song_title, :pronouns, :artist_name, :file, :blurb, :artwork, :start_time, :b_side)
   end
 
   def password_required

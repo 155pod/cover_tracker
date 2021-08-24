@@ -1,13 +1,24 @@
-<div id="cover_list">
+<%= content_tag(:div, id: (covers.any? && covers.first.b_side? ? "b_side_list" : "cover_list")) do %>
   <% covers.each_with_index do |cover, idx| %>
-    <div id="<%= dom_id(cover) %>" class="border rounded p-4 mb-4">
+    <% cover_classes = cover.b_side? ? "cover b-side" : "cover" %>
+
+    <div id="<%= dom_id(cover) %>" class="<%= cover_classes %> border rounded p-4 mb-4">
       <div class="cover-actions">
+        <% if cover.b_side? %>
+          <%= button_to toggle_b_side_cover_path(cover), { method: :post, class: "btn btn-secondary btn-sm js-toggle-b-side mx-1", params: { password: params[:password] }, data: { target: dom_id(cover) }, title: "Unmark as B-Side", remote: true } do %>
+            <i class="bi bi-layers-fill"></i>
+          <% end %>
+        <% else %>
+          <%= button_to toggle_b_side_cover_path(cover), { method: :post, class: "btn btn-outline-secondary btn-sm js-toggle-b-side mx-1", params: { password: params[:password] }, data: { target: dom_id(cover) }, title: "Mark as B-Side", remote: true } do %>
+            <i class="bi bi-layers"></i>
+          <% end %>
+        <% end %>
         <% if cover.discarded? %>
-          <%= button_to unarchive_cover_path(cover), { method: :post, class: "btn btn-primary btn-sm js-remove-cover", params: { password: params[:password] }, data: { target: dom_id(cover) }, title: "Unarchive", remote: true } do %>
+          <%= button_to unarchive_cover_path(cover), { method: :post, class: "btn btn-primary btn-sm js-remove-cover mx-1", params: { password: params[:password] }, data: { target: dom_id(cover) }, title: "Unarchive", remote: true } do %>
             <i class="bi bi-archive"></i>
           <% end %>
         <% else %>
-          <%= button_to archive_cover_path(cover), { method: :post, class: "btn btn-secondary btn-sm js-remove-cover", params: { password: params[:password] }, data: { target: dom_id(cover) }, title: "Archive", remote: true } do %>
+          <%= button_to archive_cover_path(cover), { method: :post, class: "btn btn-secondary btn-sm js-remove-cover mx-1", params: { password: params[:password] }, data: { target: dom_id(cover) }, title: "Archive", remote: true } do %>
             <i class="bi bi-archive"></i>
           <% end %>
         <% end %>
@@ -20,7 +31,6 @@
           <span class="badge bg-secondary">Archived</span>
         <% end %>
       </h4>
-
 
       <%= l cover.created_at, format: :long %><br/>
       <b>Title:</b> <%= cover.song_title %><br/>
@@ -50,4 +60,4 @@
   <% end %>
     </div>
   <% end %>
-</div>
+<% end %>

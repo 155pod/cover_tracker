@@ -31,12 +31,18 @@ audio {
 	margin-top: 10px;
 }
 
+.cover.selected {
+  background-color: rgba(176,196,222,0.2);
+  transition: background-color 0.2s ease-in-out;
+}
+
 .cover-title {
 	cursor: grab;
 }
 
 .cover-actions {
-	float: right;
+  display: flex;
+  float: right;
 }
 
 .deleting {
