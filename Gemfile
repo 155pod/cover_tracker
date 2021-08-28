@@ -22,6 +22,7 @@ gem "aws-sdk-s3"
 
 gem "discard"
 gem "barnes"
+gem "image_processing"
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
