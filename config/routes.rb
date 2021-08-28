@@ -13,6 +13,8 @@ Rails.application.routes.draw do
       post :archive
       post :unarchive
       post :toggle_b_side
+
+      get :artwork
     end
     collection do
       post :archive_all

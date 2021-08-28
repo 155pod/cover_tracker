@@ -3,6 +3,19 @@ class CoversController < ApplicationController
 
   before_action :password_required, only: [:index, :archive, :archive_all, :update_order]
 
+  def artwork
+    cover = Cover.find(params[:id])
+
+    redirect_to_admin unless cover.artwork.attached?
+
+    @artwork =
+      if cover.artwork.variable?
+        cover.artwork.variant(resize_to_limit: [1440,1440]).processed.url
+      else
+        rails_blob_path(cover.artwork, disposition: "inline")
+      end
+  end
+
   def new
     @cover = Cover.new
   end
