@@ -42,8 +42,13 @@
 
   <% if cover.artwork.attached? %>
     <b>Artwork:</b>
-    <% artwork_path = rails_blob_path(cover.artwork, disposition: "inline") %>
-    <%= link_to cover.artwork.blob.filename.sanitized, artwork_path, target: "_blank" %><br />
+    <%= link_to(
+      cover.artwork.blob.filename.sanitized,
+      cover.artwork.variable? ?
+        cover.artwork.variant(resize_to_limit: [1440,1440]).processed.url :
+          rails_blob_path(cover.artwork, disposition: "inline"),
+      target: "_blank"
+    ) %><br />
   <% end %>
 
   <% if cover.blurb.present? %>

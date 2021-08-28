@@ -1,4 +1,6 @@
 class CoversController < ApplicationController
+  include ActiveStorage::SetCurrent
+
   before_action :password_required, only: [:index, :archive, :archive_all, :update_order]
 
   def new
