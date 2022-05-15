@@ -82,8 +82,8 @@ GEM
       multi_json (~> 1)
       statsd-ruby (~> 1.1)
     bindex (0.8.1)
-    bootsnap (1.7.2)
-      msgpack (~> 1.0)
+    bootsnap (1.11.1)
+      msgpack (~> 1.2)
     bugsnag (6.21.0)
       concurrent-ruby (~> 1.0)
     builder (3.2.4)
@@ -126,7 +126,7 @@ GEM
     mini_magick (4.11.0)
     mini_mime (1.1.0)
     minitest (5.14.4)
-    msgpack (1.4.2)
+    msgpack (1.5.1)
     multi_json (1.15.0)
     nio4r (2.5.8)
     nokogiri (1.12.3-x86_64-darwin)
@@ -230,6 +230,7 @@ GEM
 PLATFORMS
   x86_64-darwin-19
   x86_64-darwin-20
+  x86_64-darwin-21
   x86_64-linux
 
 DEPENDENCIES
@@ -256,7 +257,7 @@ DEPENDENCIES
   webpacker (= 6.0.0.beta.5)
 
 RUBY VERSION
-   ruby 3.0.2p107
+   ruby 3.0.3p157
 
 BUNDLED WITH
-   2.2.25
+   2.2.32
