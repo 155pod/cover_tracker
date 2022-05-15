@@ -41,7 +41,6 @@ end
 
 group :production do
   gem "pg"
-  gem "bugsnag", "~> 6.19"
 end
 
 group :development, :test do
