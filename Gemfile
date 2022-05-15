@@ -30,6 +30,11 @@ gem "image_processing"
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
+# Not sure why yet, but when trying to deploy the app on fly.io I get an error message:
+# "Could not find racc-1.5.2" even though I see it in the Gemfile.lock.
+#
+gem "racc"
+
 group :development do
   gem 'sqlite3', '~> 1.4'
 end
