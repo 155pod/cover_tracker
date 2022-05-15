@@ -90,7 +90,7 @@ class CoversController < ApplicationController
 
   def password_required
     password = params[:password].to_s
-    secret = Rails.application.credentials[:password]
+    secret = ENV.fetch("ADMIN_PASSWORD", Rails.application.credentials[:password])
     unless ActiveSupport::SecurityUtils.secure_compare(password, secret)
       render plain: "password required", status: 403
     end
