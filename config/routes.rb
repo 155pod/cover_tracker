@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   get "/", to: "covers#new"
   get "/success", to: "covers#success"
   post "/upload", to: "covers#create", as: :upload

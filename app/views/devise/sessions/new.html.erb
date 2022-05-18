@@ -1,0 +1,37 @@
+<div class="log-in-or-register">
+  <h2>Log in</h2>
+  <%= form_for(
+    resource,
+    as: resource_name,
+    url: session_path(resource_name)
+  ) do |f| %>
+    <div class="field">
+      <%= f.label :username, class: "form-label" %>
+      <%= f.text_field(:username, autofocus: true, class: "form-control") %>
+    </div>
+
+    <div class="field">
+      <%= f.label :password, class: "form-label" %>
+      <%= f.password_field(:password,
+        autocomplete: "current-password", class: "form-control") %>
+    </div>
+
+    <% if devise_mapping.rememberable? %>
+      <div class="field">
+        <%= f.check_box :remember_me, class: "form-label" %>
+        <%= f.label :remember_me %>
+      </div>
+    <% end %>
+
+    <div class="actions">
+      <%= f.submit "Log in 🌸", class: "btn btn-light" %>
+    </div>
+  <% end %>
+  <h2>Sign up</h2>
+  <span class="card-text">
+    Go for it. You'll get approved access manually by an admin later.
+  </span>
+  <%= link_to "Sign up 🤙",
+    new_user_registration_path,
+    class: "card-link btn btn-light" %>
+</div>

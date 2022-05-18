@@ -49,6 +49,43 @@ audio {
 	opacity: 50%;
 }
 
+.log-in-or-register {
+  margin: auto;
+  max-width: 18em;
+}
+
+.log-in-or-register h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  padding: 1.5em 0 1rem;
+}
+
+.log-in-or-register a,
+.log-in-or-register input[type='submit'] {
+ margin: 1em 0;
+}
+
 input[value]:invalid {
   border: red solid 3px;
+}
+
+ul.auth-links {
+  list-style-type: none;
+  padding: 2em 1em 1em 0;
+  text-align: center;
+}
+
+ul.auth-links li {
+  display: inline;
+  padding: 0.75em;
+}
+
+@media only screen and (max-width: 660px) {
+  ul.auth-links li {
+    display: block;
+  }
+}
+
+ul.auth-links li a {
+  text-decoration: none;
 }

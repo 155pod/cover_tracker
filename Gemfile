@@ -20,6 +20,7 @@ gem 'jbuilder', '~> 2.7'
 
 gem "aws-sdk-s3"
 
+gem "devise"
 gem "discard"
 gem "barnes"
 gem "image_processing"

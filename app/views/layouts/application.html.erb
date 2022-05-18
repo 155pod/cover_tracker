@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html> <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -40,5 +39,22 @@
       <% end %>
       <%= yield %>
     </div>
+    <% if controller_name != "sessions" %>
+      <ul class="auth-links">
+        <% if current_user %>
+          <li>
+            <small>
+              Logged in as <strong><%= current_user.username %></strong>
+            </small>
+          </li>
+          <%= content_tag :li,
+            (link_to "Change username or password", edit_user_registration_path, class: "btn btn-light")
+          %>
+          <%= content_tag :li,
+            (link_to "Log out", destroy_user_session_path, class: "btn btn-light", method: :delete)
+          %>
+        <% end %>
+      </ul>
+    <% end %>
   </body>
 </html>

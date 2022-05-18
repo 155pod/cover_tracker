@@ -1,12 +1,20 @@
 class CoversController < ApplicationController
   include ActiveStorage::SetCurrent
 
-  before_action :password_required, only: [:index, :archive, :archive_all, :update_order]
+  ADMINABLE_CONTROLLER_ACTIONS = [
+    :archive,
+    :archive_all,
+    :index,
+    :update_order
+  ]
+
+  before_action :authenticate_user!, only: ADMINABLE_CONTROLLER_ACTIONS
+  before_action :kick_normals, only: ADMINABLE_CONTROLLER_ACTIONS
 
   def artwork
     cover = Cover.find(params[:id])
 
-    redirect_to_admin unless cover.artwork.attached?
+    redirect_to admin_path unless cover.artwork.attached?
 
     @artwork =
       if cover.artwork.variable?
@@ -23,10 +31,13 @@ class CoversController < ApplicationController
   def create
     cover = Cover.new(new_cover_params)
     if cover.save
-      flash[:notice] = "Successfully submitted #{cover.artist_name} - \"#{cover.song_title}\""
+      flash[:notice] = "Successfully submitted %s – \"%s\"." % [
+        cover.artist_name,
+        cover.song_title
+      ]
       redirect_to "/success"
     else
-      flash[:error] = "ERROR: There was a problem saving your cover"
+      flash[:error] = "ERROR: There was a problem saving your cover."
       redirect_to "/"
     end
   end
@@ -47,7 +58,7 @@ class CoversController < ApplicationController
 
   def archive
     Cover.find(params[:id]).discard!
-    redirect_to_admin
+    redirect_to admin_path
   end
 
   def unarchive
@@ -64,7 +75,7 @@ class CoversController < ApplicationController
       end
 
     covers.update_all(discarded_at: Time.current)
-    redirect_to_admin
+    redirect_to admin_path
   end
 
   def toggle_b_side
@@ -84,19 +95,24 @@ class CoversController < ApplicationController
 
   private
 
-  def new_cover_params
-    params.require(:cover).permit(:song_title, :pronouns, :artist_name, :file, :blurb, :artwork, :start_time, :b_side)
-  end
-
-  def password_required
-    password = params[:password].to_s
-    secret = ENV.fetch("ADMIN_PASSWORD", Rails.application.credentials[:password])
-    unless ActiveSupport::SecurityUtils.secure_compare(password, secret)
-      render plain: "password required", status: 403
+  def kick_normals
+    if action_name == "index"
+      redirect_to new_user_session_path unless current_user.admin?
+    else
+      redirect_to "/", alert: "Admins only, sorry!"
     end
   end
 
-  def redirect_to_admin
-    redirect_to admin_path(password: params[:password])
+  def new_cover_params
+    params.require(:cover).permit(
+      :artist_name,
+      :artwork,
+      :b_side,
+      :blurb,
+      :file,
+      :pronouns,
+      :song_title,
+      :start_time
+    )
   end
 end
