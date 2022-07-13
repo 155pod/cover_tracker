@@ -28,7 +28,7 @@
   </button>
 </div>
 
-<%= render "list", covers: @covers unless @covers.blank? %>
+<%= render "list", covers: @covers, id: "cover_list" %>
 
 <h1 class="mb-4 mt-4">Current B-Sides (<%= @b_sides.size %>)</h1>
 
@@ -38,4 +38,4 @@
   </button>
 </div>
 
-<%= render "list", covers: @b_sides unless @b_sides.blank? %>
+<%= render "list", covers: @b_sides, id: "b_side_list" %>

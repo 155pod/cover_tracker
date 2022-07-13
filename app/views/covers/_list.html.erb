@@ -1,4 +1,4 @@
-<%= content_tag(:div, id: (covers.any? && covers.first.b_side? ? "b_side_list" : "cover_list")) do %>
+<%= content_tag(:div, id: id) do %>
   <% covers.each_with_index do |cover, idx| %>
     <% cover_classes = cover.b_side? ? "cover b-side" : "cover" %>
 
