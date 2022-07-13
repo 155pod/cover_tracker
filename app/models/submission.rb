@@ -1,4 +1,6 @@
-class Cover < ApplicationRecord
+class Submission < ApplicationRecord
+  self.table_name = "covers"
+
   has_one_attached :file
   has_one_attached :artwork
 

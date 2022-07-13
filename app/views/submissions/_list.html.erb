@@ -1,0 +1,66 @@
+<%= content_tag(:div, id: id) do %>
+  <% submissions.each_with_index do |submission, idx| %>
+    <% submission_classes = submission.b_side? ? "submission b-side" : "submission" %>
+
+    <div id="<%= dom_id(submission) %>" class="<%= submission_classes %> border rounded p-4 mb-4">
+      <div class="submission-actions">
+        <% if submission.b_side? %>
+          <%= button_to toggle_b_side_submission_path(submission), { method: :post, class: "btn btn-secondary btn-sm js-toggle-b-side mx-1", params: { password: params[:password] }, data: { target: dom_id(submission) }, title: "Unmark as B-Side", remote: true } do %>
+            <i class="bi bi-layers-fill"></i>
+          <% end %>
+        <% else %>
+          <%= button_to toggle_b_side_submission_path(submission), { method: :post, class: "btn btn-outline-secondary btn-sm js-toggle-b-side mx-1", params: { password: params[:password] }, data: { target: dom_id(submission) }, title: "Mark as B-Side", remote: true } do %>
+            <i class="bi bi-layers"></i>
+          <% end %>
+        <% end %>
+        <% if submission.discarded? %>
+          <%= button_to unarchive_submission_path(submission), { method: :post, class: "btn btn-primary btn-sm js-remove-submission mx-1", params: { password: params[:password] }, data: { target: dom_id(submission) }, title: "Unarchive", remote: true } do %>
+            <i class="bi bi-archive"></i>
+          <% end %>
+        <% else %>
+          <%= button_to archive_submission_path(submission), { method: :post, class: "btn btn-secondary btn-sm js-remove-submission mx-1", params: { password: params[:password] }, data: { target: dom_id(submission) }, title: "Archive", remote: true } do %>
+            <i class="bi bi-archive"></i>
+          <% end %>
+        <% end %>
+      </div>
+
+      <h4 class="submission-title">
+        <small class="text-muted"><span class="submission-index"><%= 1 + idx %></span>.</small>
+        <%= submission.artist_name %> - "<%= submission.song_title %>"
+        <% if submission.discarded? %>
+          <span class="badge bg-secondary">Archived</span>
+        <% end %>
+      </h4>
+
+      <%= l submission.created_at, format: :long %><br/>
+      <b>Title:</b> <%= submission.song_title %><br/>
+      <b>Artist:</b> <%= submission.artist_name %>
+    <% if submission.pronouns.present? %>
+      (pronouns: <%= submission.pronouns %>)
+    <% end %>
+  <br />
+
+  <% if submission.artwork.attached? %>
+    <b>Artwork:</b>
+    <%= link_to(
+      submission.artwork.blob.filename.sanitized,
+      artwork_submission_path(submission), target: "_blank"
+    ) %>
+    <br />
+  <% end %>
+
+  <% if submission.blurb.present? %>
+    <blockquote class="blurb">
+      <%= simple_format submission.blurb %>
+    </blockquote>
+  <% end %>
+
+  <% if blob = submission.file.blob %>
+    <%= link_to blob.filename.sanitized, rails_blob_path(submission.file, disposition: "attachment"), download: "download", target: "_blank" %>
+    <%= render "player/player", submission: submission %>
+  <% else %>
+    broken :(
+  <% end %>
+    </div>
+  <% end %>
+<% end %>

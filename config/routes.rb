@@ -1,15 +1,15 @@
 Rails.application.routes.draw do
   devise_for :users
-  get "/", to: "covers#new"
-  get "/success", to: "covers#success"
-  post "/upload", to: "covers#create", as: :upload
+  get "/", to: "submissions#new"
+  get "/success", to: "submissions#success"
+  post "/upload", to: "submissions#create", as: :upload
 
-  get "/admin", to: "covers#index", as: :admin
-  get "/admin/archived", to: "covers#index_archived", as: :admin_archived
+  get "/admin", to: "submissions#index", as: :admin
+  get "/admin/archived", to: "submissions#index_archived", as: :admin_archived
 
   get "/player", to: "player#show"
 
-  resources :covers, only: [:update] do
+  resources :submissions, only: [:update] do
     member do
       post :archive
       post :unarchive

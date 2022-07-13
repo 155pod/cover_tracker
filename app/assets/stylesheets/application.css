@@ -31,16 +31,16 @@ audio {
 	margin-top: 10px;
 }
 
-.cover.selected {
+.submission.selected {
   background-color: rgba(176,196,222,0.2);
   transition: background-color 0.2s ease-in-out;
 }
 
-.cover-title {
+.submission-title {
 	cursor: grab;
 }
 
-.cover-actions {
+.submission-actions {
   display: flex;
   float: right;
 }

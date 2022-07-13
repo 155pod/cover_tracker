@@ -1,9 +1,9 @@
 
 <div class="mb-3">
-  <%= form.label :song_title, "Cover Title", class: "form-label form-required" %>*
+  <%= form.label :song_title, "Title", class: "form-label form-required" %>*
   <%= form.text_field :song_title, required: true, class: "form-control" %>
   <div class="form-text">
-    What's this cover called?
+    What's it called?
   </div>
 </div>
 
@@ -22,7 +22,7 @@
   <%= form.label :artist_name, "Artist name", class: "form-label" %>*
   <%= form.text_field :artist_name, required: true, class: "form-control" %>
   <div class="form-text">
-    Who is this cover by?
+    Who is it by?
   </div>
 </div>
 
@@ -40,7 +40,7 @@
 <div class="mb-3">
   <%= form.label :artwork, "Artwork", class: "form-label" %>
   <%= form.file_field :artwork, class: "form-control form-control-sm", direct_upload: true %>
-  <div class="form-text">Artwork for your cover (optional)</div>
+  <div class="form-text">Artwork for your submission (optional)</div>
 </div>
 
 <div class="mb-3">
@@ -59,7 +59,7 @@
   document.querySelectorAll(".pronoun-suggestion").forEach(function(el){
     el.classList.add("text-link");
     el.addEventListener("click", function() {
-      document.querySelector("#cover_pronouns").value = el.innerText;
+      document.querySelector("#submission_pronouns").value = el.innerText;
     })
   });
 </script>
