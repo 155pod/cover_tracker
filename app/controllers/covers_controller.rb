@@ -96,7 +96,7 @@ class CoversController < ApplicationController
   private
 
   def kick_normals
-    if action_name == "index"
+    if ADMINABLE_CONTROLLER_ACTIONS.include? action_name.to_sym
       redirect_to new_user_session_path unless current_user.admin?
     else
       redirect_to "/", alert: "Admins only, sorry!"
