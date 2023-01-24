@@ -1,7 +1,7 @@
 require "application_system_test_case"
 
 class SubmissionUploadsTest < ApplicationSystemTestCase
-  test "visiting the index" do
+  test "submitting a track" do
     assert_empty Submission.all
 
     visit "/"
