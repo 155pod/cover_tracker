@@ -31,21 +31,11 @@ gem "image_processing"
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
-# Not sure why yet, but when trying to deploy the app on fly.io I get an error message:
-# "Could not find racc-1.5.2" even though I see it in the Gemfile.lock.
-#
-gem "racc"
-
 gem "sqlite3", "~> 1.4"
 
 group :production do
   # FIXME: In a subsequent commit we can remove our dependency on `pg`.
   gem "pg"
-end
-
-group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
 
 group :development do
@@ -55,8 +45,6 @@ group :development do
   # Can be configured to work on production as well see: https://github.com/MiniProfiler/rack-mini-profiler/blob/master/README.md
   gem 'rack-mini-profiler', '~> 3.0'
   gem 'listen', '~> 3.3'
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  #gem 'spring'
 end
 
 group :test do
@@ -66,7 +54,3 @@ group :test do
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
 end
-
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-
