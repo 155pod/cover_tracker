@@ -16,5 +16,9 @@ module CoverTracker
 
     # Allows more time for uploads
     config.active_storage.service_urls_expire_in = 1.hour
+
+    # Use VIPS for processing image transformations.
+    #
+    config.active_storage.variant_processor = :vips
   end
 end

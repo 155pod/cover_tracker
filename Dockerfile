@@ -91,6 +91,7 @@ RUN --mount=type=cache,id=prod-apt-cache,sharing=locked,target=/var/cache/apt \
         file \
         fuse3 \
         gzip \
+        libvips \
         libsqlite3-0 \
         sqlite3 && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
