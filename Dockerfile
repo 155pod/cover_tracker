@@ -92,7 +92,6 @@ RUN --mount=type=cache,id=prod-apt-cache,sharing=locked,target=/var/cache/apt \
         fuse3 \
         gzip \
         libsqlite3-0 \
-        postgresql-client \
         sqlite3 && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
@@ -124,13 +123,10 @@ ENV SECRET_KEY_BASE 1
 # ENV AWS_SECRET_ACCESS_KEY=1
 
 # Run build task defined in lib/tasks/fly.rake
-ARG BUILD_COMMAND="bin/rails fly:build"
-RUN ${BUILD_COMMAND}
+RUN bin/rails fly:build
 
-# Default server start instructions.  Generally Overridden by fly.toml.
+# Mount LiteFS and start the application on port 8080 (LiteFS is being used as a
+# supervisor  for the Rails server process.)
+#
 ENV PORT 8080
-ARG SERVER_COMMAND="bin/rails fly:server"
-ENV SERVER_COMMAND ${SERVER_COMMAND}
-
-# Mount LiteFS and run the server command.
-CMD ${SERVER_COMMAND}
+CMD litefs mount
