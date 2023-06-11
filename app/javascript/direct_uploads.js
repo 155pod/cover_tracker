@@ -33,7 +33,7 @@ addEventListener("direct-upload:error", event => {
     <div class="alert alert-danger" role="alert">
       An error occurred processing your upload:<br/>
       ${error}<br/>
-      If retrying doesn't work :( send your cover to blink155pod@gmail.com
+      If retrying doesn't work :( send your cover your fellow comp organizer or shout in the community Discord server.
     </div>
   `)
 
