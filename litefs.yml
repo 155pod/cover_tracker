@@ -9,10 +9,16 @@ fuse:
 data:
   dir: "/var/lib/litefs"
 
+exec:
+  - cmd: "bin/rails fly:release"
+    if-candidate: true
+  - cmd: "bin/rails fly:server"
+
 # The lease section defines how LiteFS creates a cluster and implements leader
 # election. For dynamic clusters, use the "consul". This allows the primary to
 # change automatically when the current primary goes down. For a simpler setup,
 # "static" which assigns a single node to be the primary and does not failover.
 #
 lease:
+  promote: true
   type: "static"

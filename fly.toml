@@ -14,6 +14,7 @@ processes = []
   release_command = "bin/rails fly:release"
 
 [env]
+  DATABASE_URL = "sqlite3:///litefs/production.db"
   LANG = "en_US.UTF-8"
   PORT = "8080"
   RAILS_MAX_THREADS = "16"
