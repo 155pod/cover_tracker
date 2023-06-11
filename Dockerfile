@@ -17,9 +17,9 @@
 # We recommend using the highest patch level for better security and
 # performance.
 
-ARG RUBY_VERSION=3.0.3
-ARG VARIANT=jemalloc-slim
-FROM quay.io/evl.ms/fullstaq-ruby:${RUBY_VERSION}-${VARIANT} as base
+ARG RUBY_VERSION=3.1.4
+FROM quay.io/evl.ms/fullstaq-ruby:${RUBY_VERSION}-jemalloc-bullseye-slim as base
+ENV PATH /usr/lib/fullstaq-ruby/${RUBY_VERSION}-jemalloc/bin:$PATH
 
 ARG NODE_VERSION=16
 ARG YARN_VERSION=1.22.19
