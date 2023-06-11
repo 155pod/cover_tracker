@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_16_023127) do
-
+ActiveRecord::Schema[7.0].define(version: 2023_06_11_002427) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -28,8 +27,8 @@ ActiveRecord::Schema.define(version: 2022_05_16_023127) do
     t.string "content_type"
     t.text "metadata"
     t.string "service_name", null: false
-    t.bigint "byte_size", null: false
-    t.string "checksum", null: false
+    t.integer "byte_size", null: false
+    t.string "checksum"
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
@@ -45,8 +44,8 @@ ActiveRecord::Schema.define(version: 2022_05_16_023127) do
     t.string "pronouns"
     t.string "song_title"
     t.text "blurb"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.datetime "discarded_at"
     t.integer "start_time_seconds", default: 0
     t.integer "position", default: 0
@@ -59,8 +58,8 @@ ActiveRecord::Schema.define(version: 2022_05_16_023127) do
     t.string "encrypted_password", default: "", null: false
     t.datetime "remember_created_at"
     t.boolean "admin", default: false, null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
