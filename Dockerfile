@@ -51,18 +51,22 @@ RUN volta install node@${NODE_VERSION} yarn@${YARN_VERSION} && \
 
 #######################################################################
 
-# install packages only needed at build time
+# Installs packages only needed at build time.
 
 FROM base as build_deps
-
-ARG BUILD_PACKAGES="git build-essential libpq-dev wget vim curl gzip xz-utils libsqlite3-dev"
-ENV BUILD_PACKAGES ${BUILD_PACKAGES}
-
 RUN --mount=type=cache,id=dev-apt-cache,sharing=locked,target=/var/cache/apt \
     --mount=type=cache,id=dev-apt-lib,sharing=locked,target=/var/lib/apt \
     apt-get update -qq && \
-    apt-get install --no-install-recommends -y ${BUILD_PACKAGES} \
-    && rm -rf /var/lib/apt/lists /var/cache/apt/archives
+    apt-get install --no-install-recommends -y \
+        build-essential \
+        curl \
+        git \
+        gzip \
+        libpq-dev \
+        libsqlite3-dev \
+        wget \
+        xz-utils && \
+    rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 #######################################################################
 
@@ -75,24 +79,31 @@ RUN bundle install -j8 && rm -rf vendor/bundle/ruby/*/cache
 
 #######################################################################
 
-# install deployment packages
+# Install packages required at deployment and runtime.
 
 FROM base
-
-ARG DEPLOY_PACKAGES="postgresql-client file vim curl gzip libsqlite3-0"
-ENV DEPLOY_PACKAGES=${DEPLOY_PACKAGES}
-
 RUN --mount=type=cache,id=prod-apt-cache,sharing=locked,target=/var/cache/apt \
     --mount=type=cache,id=prod-apt-lib,sharing=locked,target=/var/lib/apt \
     apt-get update -qq && \
     apt-get install --no-install-recommends -y \
-    ${DEPLOY_PACKAGES} \
-    && rm -rf /var/lib/apt/lists /var/cache/apt/archives
+        ca-certificates \
+        curl \
+        file \
+        fuse3 \
+        gzip \
+        libsqlite3-0 \
+        postgresql-client \
+        sqlite3 && \
+    rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # copy installed gems
 COPY --from=gems /app /app
 COPY --from=gems /usr/lib/fullstaq-ruby/versions /usr/lib/fullstaq-ruby/versions
 COPY --from=gems /usr/local/bundle /usr/local/bundle
+
+# Copy LiteFS and its configuration file to default readable location.
+COPY --from=flyio/litefs:0.4 /usr/local/bin/litefs /usr/local/bin/litefs
+COPY litefs.yml /etc/litefs.yml
 
 #######################################################################
 
@@ -120,4 +131,6 @@ RUN ${BUILD_COMMAND}
 ENV PORT 8080
 ARG SERVER_COMMAND="bin/rails fly:server"
 ENV SERVER_COMMAND ${SERVER_COMMAND}
+
+# Mount LiteFS and run the server command.
 CMD ${SERVER_COMMAND}

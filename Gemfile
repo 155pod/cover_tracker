@@ -36,11 +36,10 @@ gem 'bootsnap', '>= 1.4.4', require: false
 #
 gem "racc"
 
-group :development do
-  gem 'sqlite3', '~> 1.4'
-end
+gem "sqlite3", "~> 1.4"
 
 group :production do
+  # FIXME: In a subsequent commit we can remove our dependency on `pg`.
   gem "pg"
 end
 

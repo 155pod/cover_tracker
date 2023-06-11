@@ -20,6 +20,10 @@ processes = []
   RAILS_SERVE_STATIC_FILES = "enabled"
   SERVER_COMMAND = "bundle exec puma -C config/puma.rb"
 
+[mounts]
+  source = "database"
+  destination = "/var/lib/litefs"
+
 [experimental]
   allowed_public_ports = []
   auto_rollback = true

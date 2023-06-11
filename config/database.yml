@@ -20,6 +20,11 @@ test:
   <<: *default
   database: db/test.sqlite3
 
+# FIXME: In a subsequent commit we will move to using SQLite in production.
+#
+#production:
+#  <<: *default
+#  database: /litefs/dbs/production.db
 production:
   <<: *default
   adapter: postgresql
