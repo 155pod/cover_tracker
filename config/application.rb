@@ -9,12 +9,16 @@ Bundler.require(*Rails.groups)
 module CoverTracker
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
+    #
     config.load_defaults 6.1
 
-    # Pod time
+    # Pod time (R.I.P. the Pod).
+    #
     config.time_zone = 'Eastern Time (US & Canada)'
 
-    # Allows more time for uploads
+    # Users may upload very large WAV files, so we should give them lots of time
+    # to upload them.
+    #
     config.active_storage.service_urls_expire_in = 1.hour
 
     # Use VIPS for processing image transformations.
